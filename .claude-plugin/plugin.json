@@ -1,0 +1,20 @@
+{
+  "name": "laravel-scale-kit",
+  "version": "0.1.0",
+  "description": "Architecture skills for medium-to-large Laravel codebases: Controller -> Orchestrator -> Action -> Task -> Repository, domain exceptions, policy-based authorization, model layout, migration placement, query performance on very large tables, and a manager/subagent delegation model.",
+  "author": {
+    "name": "Ahmad Ahmadov"
+  },
+  "homepage": "https://github.com/YOUR-GITHUB-USERNAME/laravel-scale-kit",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "php",
+    "architecture",
+    "action-task",
+    "repository",
+    "eloquent",
+    "clean-architecture",
+    "claude-code"
+  ]
+}

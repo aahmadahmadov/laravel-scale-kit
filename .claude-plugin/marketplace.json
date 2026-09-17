@@ -1,0 +1,24 @@
+{
+  "name": "laravel-scale-kit",
+  "owner": {
+    "name": "Ahmad Ahmadov"
+  },
+  "metadata": {
+    "description": "Claude Code skills for scaling a Laravel codebase past the point where controllers and services stop working.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "laravel-scale-kit",
+      "source": "./",
+      "description": "17 skills, 8 subagents and 3 commands that hold one opinionated Laravel architecture in place across a large codebase.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Ahmad Ahmadov"
+      },
+      "license": "MIT",
+      "category": "architecture",
+      "keywords": ["laravel", "php", "architecture", "action-task", "repository"]
+    }
+  ]
+}

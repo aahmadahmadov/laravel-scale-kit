@@ -29,7 +29,7 @@ performance — exists to keep that shape true under pressure.
 ## Install
 
 ```bash
-/plugin marketplace add YOUR-GITHUB-USERNAME/laravel-scale-kit
+/plugin marketplace add aahmadahmadov/laravel-scale-kit
 /plugin install laravel-scale-kit@laravel-scale-kit
 ```
 

@@ -2,7 +2,7 @@
 
 Guidance for Claude Code in <project-name>.
 
-> Generated from [laravel-scale-kit](https://github.com/YOUR-GITHUB-USERNAME/laravel-scale-kit).
+> Generated from [laravel-scale-kit](https://github.com/aahmadahmadov/laravel-scale-kit).
 > This file holds the **decisions**. The depth lives in the plugin's skills, which load on demand —
 > keep this file short enough that it is actually read.
 

@@ -3,7 +3,7 @@
 ## 1. Install the plugin
 
 ```bash
-/plugin marketplace add YOUR-GITHUB-USERNAME/laravel-scale-kit
+/plugin marketplace add aahmadahmadov/laravel-scale-kit
 /plugin install laravel-scale-kit@laravel-scale-kit
 ```
 
@@ -14,7 +14,7 @@ Verify: `/plugin` should list `laravel-scale-kit`, and the skills appear in the 
 Clone it and add the local path instead:
 
 ```bash
-git clone https://github.com/YOUR-GITHUB-USERNAME/laravel-scale-kit.git ~/projects/laravel-scale-kit
+git clone https://github.com/aahmadahmadov/laravel-scale-kit.git ~/projects/laravel-scale-kit
 ```
 
 ```bash

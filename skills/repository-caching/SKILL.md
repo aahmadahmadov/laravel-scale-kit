@@ -3,7 +3,7 @@ name: repository-caching
 description: Use when adding or debugging caching in a Laravel data layer — cacheable repositories, tag-based invalidation, cached projections, stale reads, and cache keys. Invoke when a read returns stale data after a write, when deciding what to cache, when a cache flush does not seem to work, or when a sync process must bypass the cache.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: cache, caching, stale data, flushCache, cache tags, Redis, invalidation, cached repository, TTL, cache key
   role: specialist

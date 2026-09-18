@@ -3,7 +3,7 @@ name: production-data-safety
 description: Use before running any database statement, artisan command, or script in an environment that holds real or production-snapshot data. Invoke when about to run migrate, seed, tinker, an UPDATE/DELETE/DDL statement, a backfill, or any command whose blast radius is unclear. Also use when writing a brief for another agent that will touch a database.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: operations
   triggers: migrate, db:seed, migrate fresh, tinker, UPDATE, DELETE, TRUNCATE, DROP, backfill, production data, database safety, destructive command
   role: guardian

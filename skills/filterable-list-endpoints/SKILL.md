@@ -3,7 +3,7 @@ name: filterable-list-endpoints
 description: Use when building or reviewing a list endpoint with request-driven filtering, sorting or pagination in Laravel — allowed filters, sort allowlists, per-page handling, and filter-options endpoints. Invoke when an endpoint accepts filter[...] or sort query parameters, when an action contains a filled() check around a filter, or when pagination behaviour needs deciding.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: list endpoint, filter, sorting, pagination, per_page, query parameters, filter options, simplePaginate, allowed filters
   role: specialist

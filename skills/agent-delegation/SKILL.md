@@ -3,7 +3,7 @@ name: agent-delegation
 description: Use when working on a large codebase as a coordinating session that delegates to subagents — deciding what to delegate, writing agent briefs, running agents in parallel, and verifying their output. Invoke when a task spans many files, when choosing between doing work inline or handing it off, or when an agent's report needs verifying.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: workflow
   triggers: delegate, subagent, agent brief, parallel agents, explore first, verify agent output, manager agent, task handoff
   role: architect

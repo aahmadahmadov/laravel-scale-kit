@@ -3,7 +3,7 @@ name: php-standards
 description: Use when writing or reviewing any PHP file in this codebase — strict types, PHPDoc tags, comment policy, naming, final classes, and the small style rules that a linter cannot enforce. Invoke when creating a PHP class, when writing a docblock, when adding a comment, when a private method is being introduced, or when running a code-style pass.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: language
   triggers: PHP style, strict types, PHPDoc, docblock, comments, naming convention, final class, pint, code style, readonly
   role: specialist

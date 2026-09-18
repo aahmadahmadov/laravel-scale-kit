@@ -3,7 +3,7 @@ name: layered-architecture
 description: Use when adding or restructuring a Laravel feature and deciding which class should hold the logic — controller, orchestrator, action, task, or repository. Invoke when creating an Action or Task, when a controller is growing business logic, when a service class is being split, when one flow needs to call another, or when asked where a piece of logic belongs. Also use to review whether existing code respects the layer boundaries.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: Laravel architecture, action, task, orchestrator, service layer, where does this logic go, layer boundary, fat controller, business logic placement
   role: architect

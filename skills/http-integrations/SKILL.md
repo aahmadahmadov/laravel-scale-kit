@@ -3,7 +3,7 @@ name: http-integrations
 description: Use when integrating a third-party HTTP API into a Laravel application — adapters, managers, response normalization, error mapping, timeouts, retries, and per-integration logging. Invoke when adding an external API call, when an upstream error must become a domain error, or when an existing integration is being changed.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: third-party API, HTTP client, adapter, integration, external service, upstream error, timeout, retry, webhook, API client
   role: specialist

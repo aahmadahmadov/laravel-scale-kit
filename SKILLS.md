@@ -31,6 +31,11 @@ seeing how the pieces fit.
 | "This sort closure is copy-pasted everywhere" | `shared-static-helpers` |
 | "I need to call a third-party API" | `http-integrations` |
 | "Should this move into a package?" | `package-extraction` |
+| "Where does the transaction go?" | `transactions-and-consistency` |
+| "The job can't find a row that exists" | `transactions-and-consistency` |
+| "Duplicate rows appeared under load" | `transactions-and-consistency` |
+| "How do I test this Action?" | `testing-layered-architecture` |
+| "Our only database is a production copy — can I run the suite?" | `testing-layered-architecture` |
 | "Is it safe to run this?" | `production-data-safety` |
 | "Should I delegate this?" | `agent-delegation` |
 
@@ -39,6 +44,12 @@ seeing how the pieces fit.
 **New endpoint**
 `layered-architecture` → `http-boundary` → `repository-criteria` → `filterable-list-endpoints` →
 `authorization-policies` → `domain-exceptions`
+
+**Writing more than one row**
+`layered-architecture` → `transactions-and-consistency` → `repository-caching`
+
+**Writing tests**
+`testing-layered-architecture` → the skill for the layer under test
 
 **Slow endpoint**
 `query-performance` → `repository-caching` → `migrations-schema` (only if a plan justifies an index)
@@ -69,6 +80,8 @@ layered-architecture ── the spine; everything else refines one layer of it
 │   ├── repository-caching
 │   └── query-performance
 │       └── migrations-schema
+├── transactions-and-consistency ... the boundary around a write, and what may not cross it
+├── testing-layered-architecture .. one test shape per layer
 ├── eloquent-model-conventions
 ├── shared-static-helpers .... the small logic that otherwise scatters
 ├── localization-enums

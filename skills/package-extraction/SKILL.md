@@ -3,7 +3,7 @@ name: package-extraction
 description: Use when deciding whether code should move out of app/ into a local composer package, or when working inside one — path repositories, package boundaries, namespaced translations, and avoiding App coupling. Invoke when a class is needed by a second project, when generic infrastructure is accumulating in app/, or when editing a packages/ directory.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: composer package, local package, path repository, extract package, monorepo, shared library, package boundary, vendor symlink
   role: architect

@@ -3,7 +3,7 @@ name: query-performance
 description: Use when a Laravel/MySQL/MariaDB query is slow, when writing a query against a very large table, when reading EXPLAIN output, or when deciding between whereHas, joins and subqueries. Invoke for slow endpoint, N+1, missing index, EXPLAIN ANALYZE, pagination cost, aggregate over millions of rows, or before adding an index to a big table.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: infrastructure
   triggers: slow query, EXPLAIN, index, N+1, whereHas, join, aggregate, large table, pagination, optimizer, query plan, MariaDB, MySQL
   role: specialist

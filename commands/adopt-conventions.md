@@ -18,6 +18,11 @@ Do not guess. Establish and report:
 - Configured locales, and whether user-facing strings are already keyed.
 - Whether the database is a production snapshot, whether it is shared with another application, and
   whether binary logging is on.
+- The **test** connection: is one configured separately from development, and does the suite use a
+  trait that rebuilds the schema? If both are true against real data, say so first — it outranks
+  every other finding here.
+- Where `DB::transaction()` is currently opened (controllers, services, actions), and whether any job
+  is dispatched inside one.
 - Existing `CLAUDE.md` / `AGENTS.md` content — it must be preserved, not overwritten.
 
 ## 2. Draft

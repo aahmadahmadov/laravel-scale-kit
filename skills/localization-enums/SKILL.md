@@ -3,7 +3,7 @@ name: localization-enums
 description: Use when adding user-facing text, translation keys, or enums to a Laravel application — lang files, message keys, structured enums serialized to the frontend, and the rule that no string is hardcoded. Invoke when writing an error message, adding a lang key, creating an enum, or exposing a status value in an API response.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: translation, localization, lang file, i18n, message key, enum, status enum, label, JsonSerializable enum
   role: specialist

@@ -3,7 +3,7 @@ name: authorization-policies
 description: Use when adding or reviewing access control in a Laravel application — policies, the can middleware, route-group authorization, controller authorize calls, and model-level access predicates. Invoke when an endpoint needs permission checks, when a 403 is wrong or missing, when scattered if-checks guard data, or when deciding where an ownership check belongs.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: security
   triggers: authorization, policy, can middleware, authorize, 403, permission, access control, ownership check, gate
   role: specialist

@@ -3,3 +3,7 @@
 node_modules/
 .idea/
 .vscode/
+
+# eval runs
+evals/results/
+eval-report.html

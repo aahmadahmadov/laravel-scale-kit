@@ -3,7 +3,7 @@ name: repository-criteria
 description: Use when writing database access in a Laravel project that uses a repository layer with composable criteria — creating a repository, adding a query filter, deciding whether a query shape deserves its own class, or reviewing where an Eloquent call belongs. Invoke on repository, criteria, pushCriteria, query scoping, or when a repository is growing business methods.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: repository, criteria, pushCriteria, prettus, query object, data access layer, where clause, query builder, DB facade
   role: specialist
@@ -105,22 +105,29 @@ Two things to verify in whatever `withFreshCriteria` helper the project has:
 2. It re-applies **boot criteria** — the ones the repository registers in `boot()`. A naive reset
    drops those too, and a query that was always school-scoped silently goes global.
 
-## Write methods ignore criteria
+## Sharp edges of the base class, not of the pattern
 
-In Prettus specifically, `deleteWhere()` and `update()` do **not** call `applyCriteria()`. A criteria
-pushed to scope a write is silently ineffective — including a criteria whose whole job was to remove
-a global scope. Verify the base class's behaviour before relying on a scoped write, and prefer
-performing writes on a model instance obtained by a scoped read.
+Everything above is a rule about the pattern and holds whatever base class you use. **This section is
+different: these are behaviours of `prettus/l5-repository`.** On another base class the equivalents
+may differ or not exist — verify them rather than assuming, and correct this section for your project.
 
-## Other sharp edges in this pattern
-
+- **Write methods ignore criteria.** `deleteWhere()` and `update()` do not call `applyCriteria()`, so
+  a criteria pushed to scope a write is silently ineffective — including one whose whole job was to
+  remove a global scope. Prefer performing writes on a model instance obtained by a scoped read.
 - **`pluck()` may not reset the criteria stack.** Some base-repository methods reset after running,
   some do not. Whichever ones do not, leak their conditions into the next call on the same instance
   within a request. Know which ones, and never "fix" it by calling `resetModel()` by hand.
 - **`find()` on a repository with leaked criteria returns `null`** and looks exactly like a missing
   row. When a lookup mysteriously fails, dump the applied criteria first.
-- Pivot writes (`sync`, `attach`) performed on a model fetched through a caching repository will not
-  invalidate the cache. See `repository-caching`.
+
+One edge is not library-specific: pivot writes (`sync`, `attach`) performed on a model fetched through
+a caching repository will not invalidate the cache. See `repository-caching`.
+
+## References
+
+| Topic | File | Load when |
+|---|---|---|
+| The generic criteria a project ends up needing | `references/criteria-catalogue.md` | Before writing a new criteria, or when building the shared package |
 
 ## Checklist
 

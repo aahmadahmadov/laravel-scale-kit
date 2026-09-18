@@ -6,6 +6,11 @@ Guidance for Claude Code in <project-name>.
 > This file holds the **decisions**. The depth lives in the plugin's skills, which load on demand —
 > keep this file short enough that it is actually read.
 
+## Stack
+
+Laravel <11>, PHP <8.2>, <MySQL 8 / MariaDB 10.6>. <State the PHP version production runs if it
+differs from local — lint against that one.>
+
 ## Project Overview
 
 <Laravel 11 REST API for …. One sentence on the domain, one on who the consumers are, one on whether
@@ -70,6 +75,33 @@ not a ternary inside a constructor call.
 remain — and moves only when touched.">
 
 Depth: the `layered-architecture` skill.
+
+## Transactions
+
+The transaction boundary is the **Action**, opened once, around database work only. Tasks and
+Orchestrators never open one — a nested `DB::transaction()` is a savepoint, so an inner rollback
+leaves the outer work committed.
+
+Nothing that is not a database write goes inside: no HTTP call, no cache flush, no queue dispatch, no
+file write. **Dispatch jobs and flush caches after commit** — a job dispatched inside the transaction
+is visible to a worker before the row exists, and that failure only appears under load.
+
+Uniqueness that matters is backed by an index; `firstOrCreate`/`updateOrCreate` are not atomic.
+Anything that runs unattended states what a second run does.
+
+Depth: the `transactions-and-consistency` skill.
+
+## Testing
+
+<State the test connection here, and that it is NOT the development database.> Never use
+`RefreshDatabase`, `DatabaseMigrations` or `migrate:fresh` against a database that holds real data —
+they rebuild the schema of whatever connection resolves.
+
+Criteria are tested without a database (`toSql()` + bindings). Actions are tested with the repository
+faked, asserting which criteria were pushed. Every endpoint test asserts one allowed caller **and**
+one denied caller — a broken `can:` binding denies everyone and passes a happy-path suite.
+
+Depth: the `testing-layered-architecture` skill.
 
 ## API surface
 
@@ -222,6 +254,8 @@ Depth: the `package-extraction` skill.
 - DTOs named `*DataObject`, constructed with `new`, never `::from()`.
 - Every controller method taking input type-hints a dedicated `final` Form Request from
   `app/Http/Requests/<Domain>/`. Never read raw input in a controller.
+- `DB::transaction()` is opened in the Action and nowhere else; jobs dispatch and caches flush after
+  it commits.
 
 ## Agent Team
 

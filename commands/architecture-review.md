@@ -20,6 +20,10 @@ Read the diff first. Then check, in this order, and report only what actually fa
 8. A write outside the repository with no cache flush.
 9. A removed `@param`/`@return`/`@throws` tag.
 10. A hardcoded user-facing string.
+11. A queue dispatch, HTTP call or cache flush inside a `DB::transaction()` closure.
+12. A transaction opened in a Task or an Orchestrator, or nested inside another one.
+13. A test using `RefreshDatabase`/`DatabaseMigrations`/`migrate:fresh` against a connection that is
+    not a dedicated test database.
 
 ## Warnings
 
@@ -29,6 +33,9 @@ Read the diff first. Then check, in this order, and report only what actually fa
 - An inline sort closure or interpolated composite key that should have moved to a shared helper.
 - A `catch` that neither re-throws nor logs.
 - A new index with no `EXPLAIN` justifying it.
+- `firstOrCreate`/`updateOrCreate` guarding an invariant that no unique index backs.
+- An endpoint test that asserts only the allowed caller, never the denied one.
+- A new Criteria with no `toSql()` test.
 
 ## Output
 

@@ -24,6 +24,12 @@ You work on the part of the system where a mistake is a breach, not a bug. Slow 
 - External login handoffs: validate the callback's origin and its signature, and never trust an
   identifier supplied by the client that was not part of the signed payload.
 
+## Database
+
+Never run a statement that changes data or schema — no `UPDATE`, `DELETE`, `INSERT`, DDL, `migrate`
+or seeding, including a "quick fix" to a permissions or roles table. Propose it, state the row count,
+wait for an explicit human yes. This restriction is not inherited from whoever spawned you.
+
 ## Before finishing
 
 - State, in one sentence each: who can reach this endpoint, who cannot, and what happens to a user

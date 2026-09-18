@@ -3,7 +3,7 @@ name: domain-exceptions
 description: Use when throwing, catching, designing or translating errors in a Laravel application — business rule failures, HTTP status mapping, exception class layout, and the global handler. Invoke when creating an exception class, when a try/catch is being added to an action or task, when mapping a third-party HTTP error onto a domain error, or when deciding which error message the API should return.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: exception, error handling, try catch, throw, business rule, status code, error message, exception handler, rethrow
   role: specialist
@@ -128,6 +128,12 @@ An empty `catch` block is a bug report you will receive in six months with no st
   configured locales.
 - Never leak an upstream provider's message to your client. Map the status, use your own key.
 - `Log::` calls are the carve-out: log lines stay in English and are not translated.
+
+## References
+
+| Topic | File | Load when |
+|---|---|---|
+| Which status code | `references/status-code-map.md` | Choosing the status for a new failure, or auditing existing ones |
 
 ## Checklist
 

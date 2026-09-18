@@ -3,7 +3,7 @@ name: migrations-schema
 description: Use when writing a Laravel migration or changing database schema — adding columns, placing them with after(), indexes, foreign keys, and additive-only rules on a live database. Invoke when creating a migration, when a column needs a position, when adding an index to a big table, or when deciding whether a schema change is safe to deploy.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: infrastructure
   triggers: migration, schema, add column, after, index, foreign key, alter table, drop column, deploy schema change
   role: specialist

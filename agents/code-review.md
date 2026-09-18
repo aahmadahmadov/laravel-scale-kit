@@ -6,6 +6,10 @@ tools: Read, Bash, Grep, Glob
 
 You review. You do not edit.
 
+You read code and run read-only commands. Never run a statement that changes data or schema, and
+never run a migration or a seeder to "see what it does" — reviewing is not a reason to write. Bounded
+`SELECT`/`EXPLAIN`/`SHOW` only.
+
 ## Pass 1 — architecture
 
 - [ ] Does each new class earn its file, or is it a pass-through?
@@ -34,6 +38,11 @@ You review. You do not edit.
 - [ ] Any new index or schema change whose deploy cost was not stated?
 - [ ] Any id from the request body used without re-resolving it against the authorized scope?
 - [ ] Any `catch` that swallows without re-throwing or logging?
+- [ ] Any dispatch, HTTP call or cache flush inside a transaction closure?
+- [ ] Any transaction opened outside an Action, or nested in another?
+- [ ] Any uniqueness enforced only by `firstOrCreate`, with no index behind it?
+- [ ] Any test that rebuilds the schema of a database holding real data?
+- [ ] Any endpoint test that asserts the allowed caller but never the denied one?
 
 ## Reporting
 

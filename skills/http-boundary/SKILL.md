@@ -3,7 +3,7 @@ name: http-boundary
 description: Use when writing or reviewing a Laravel controller, Form Request, API Resource, or DTO — the classes that sit between HTTP and the domain. Invoke when a controller reads raw request input, when validation is written inline, when deciding what a Resource should expose, when naming a data object, or when shaping an endpoint's JSON payload.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: controller, form request, validation, api resource, JsonResource, DTO, data object, response shape, payload, whenLoaded
   role: specialist

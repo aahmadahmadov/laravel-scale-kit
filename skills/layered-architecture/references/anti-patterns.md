@@ -76,7 +76,7 @@ An Orchestrator that calls a single Action is a rename with extra indirection. D
 ## 8. Repository with business methods
 
 ```php
-public function findActiveByschool(int $schoolId): Collection
+public function findActiveBySchool(int $schoolId): Collection
 ```
 
 Every such method is a query shape frozen into the wrong layer, and it will grow parameters forever.

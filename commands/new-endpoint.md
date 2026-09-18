@@ -27,6 +27,8 @@ State explicitly:
 - Which steps are Tasks, and why each one is reusable or large enough to extract.
 - Which steps stay inline in the Action.
 - Whether a wrapper DTO is needed (composite payload) or the Resource can serialize the model.
+- Whether the endpoint writes more than one row. If it does, where the transaction opens, and what
+  must happen after it commits.
 - Which policy ability guards this, and whether it attaches on the route group or in the method.
 
 ## 3. Confirm

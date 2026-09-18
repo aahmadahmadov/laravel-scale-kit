@@ -3,7 +3,7 @@ name: shared-static-helpers
 description: Use when an inline closure or string-built key appears in application code — in-memory sorting, query constraint closures passed to with/withCount/whereHas, and composite keys used to group or join collections. Invoke when writing a sortBy closure, a reusable eager-load constraint, or any interpolated key used to match two collections in PHP.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: sortBy, comparator, sorting, closure, withCount constraint, query constraint, composite key, grouping key, collection join
   role: specialist

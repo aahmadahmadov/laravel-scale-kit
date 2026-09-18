@@ -3,7 +3,7 @@ name: eloquent-model-conventions
 description: Use when creating or editing an Eloquent model — member ordering, relations, scopes, accessors, casts, computed aliases, and where helper methods belong. Invoke when a model is getting long, when adding a relation or scope, when a query alias or computed flag needs declaring, or when reviewing a model for layout and conventions.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
   domain: backend
   triggers: Eloquent model, model layout, relations, scopes, casts, accessor, mutator, property-read, model conventions, alias column
   role: specialist

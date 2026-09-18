@@ -17,7 +17,10 @@ Find, and report paths for:
 - Existing Criteria that already express the filtering this endpoint needs.
 - The Resource tier that fits the field breadth this endpoint returns.
 
-Report what exists before proposing anything new.
+Report what exists before proposing anything new. **"Nothing exists yet" is a complete and valid
+answer** — on an early project it is the usual one. Say it plainly and propose the minimum chain
+(Controller → Action → Eloquent, plus a Form Request and a Resource) rather than inventing a
+repository, a criteria and a task to fill the layer table.
 
 ## 2. Decide the layers
 

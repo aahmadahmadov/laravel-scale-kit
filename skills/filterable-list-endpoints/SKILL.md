@@ -94,16 +94,19 @@ selectable** — `GET /teachers/filter-options`. Rules:
 - Role-variant endpoints: when the list changes shape per role, the options endpoint must vary with
   the same rule, in the same place.
 
-## New filter shapes go into the package
+## New filter shapes go into the generic layer
 
-When an endpoint needs a filter the package does not cover — LIKE search, a concatenated column,
-filtering through a relation — write it **in the shared package** as a generic class parameterised by
-relation/columns/request key. Not as a one-off in `app/Criteria/`. Document it in the package README
-so the next developer finds it instead of writing a seventh variant.
+When an endpoint needs a filter the existing set does not cover — LIKE search, a concatenated column,
+filtering through a relation — write it as a **generic class parameterised by relation/columns/request
+key**, in `app/Criteria/Shared/` (or the package, once the project has one). Never as a one-off
+`ListTeachersNameFilterCriteria` next to the endpoint that needed it.
+
+Document it where the generic classes are documented, so the next developer finds it instead of
+writing a seventh variant. See `package-extraction` for when `Shared/` becomes a package.
 
 ## Checklist
 
-- [ ] Form Request extends the shared filterable base
+- [ ] Form Request extends the project's filterable list base request
 - [ ] Every filter and sort field is declared in an allowlist
 - [ ] Action pushes criteria unconditionally, one flat chain
 - [ ] No `request()` below the controller

@@ -65,17 +65,21 @@ final class ActiveInEducationYearCriteria implements CriteriaInterface
 repetition is what earns a file.
 
 **When it is not:** a single-column equality. Use the generic `FieldEqualsCriteria` /
-`FieldInCriteria` from the shared toolkit. A one-off class wrapping one `where` is noise.
+`FieldInCriteria` from `Shared/`. A one-off class wrapping one `where` is noise.
 
 ## Generic vs domain-specific
 
 | Kind | Lives in | Example |
 |---|---|---|
-| Model-agnostic, parameterised by column/relation | a shared package (`packages/…-toolkit`) | `FieldEqualsCriteria`, `FilterFieldsCriteria`, `RequestSortCriteria`, `WithCriteria`, `GroupByCriteria` |
+| Model-agnostic, parameterised by column/relation | `app/Criteria/Shared/`, promoted to `packages/…-toolkit` once a second consumer exists | `FieldEqualsCriteria`, `FilterFieldsCriteria`, `RequestSortCriteria`, `WithCriteria`, `GroupByCriteria` |
 | Encodes a business rule about one domain | `app/Criteria/<Domain>/` | `ClassCurrentEducationYearCriteria`, `VisibleToParentCriteria` |
 
-Before writing a criteria, **check the package first**. Never copy a package class into `app/`. See
-the `package-extraction` skill for when a criteria has earned promotion into the package.
+A generic criteria **names no model**. That is what makes it generic, and what makes the later move
+into a package a directory move rather than a rewrite — so hold the rule from the first file, on day
+one of the project, long before any package exists.
+
+Before writing a criteria, **check `Shared/` (or the package, once there is one) first**. Never copy
+a package class back into `app/`. See `package-extraction` for the promotion threshold.
 
 ## Never use the `DB` facade
 
@@ -127,13 +131,13 @@ a caching repository will not invalidate the cache. See `repository-caching`.
 
 | Topic | File | Load when |
 |---|---|---|
-| The generic criteria a project ends up needing | `references/criteria-catalogue.md` | Before writing a new criteria, or when building the shared package |
+| The generic criteria a project ends up needing | `references/criteria-catalogue.md` | Before writing a new criteria, or when filling `app/Criteria/Shared/` |
 
 ## Checklist
 
 - [ ] Repository declares only `model()`
 - [ ] No `where`/`with`/`whereHas` called on the repository outside a Criteria
-- [ ] New criteria checked against the shared package before writing
+- [ ] New criteria checked against `app/Criteria/Shared/` (or the package) before writing
 - [ ] Criteria reused in 2+ places, or it is a generic one from the package
 - [ ] Loops wrapped in a fresh-criteria helper that preserves boot criteria
 - [ ] No `DB::table()` anywhere

@@ -42,6 +42,17 @@ traps are written against InnoDB. The architecture rules still hold; the databas
 The kit is written for an API. A Livewire, Inertia or Filament-first application shares the layering
 but not the `http-boundary` and Resource rules.
 
+**It depends on nothing.** There is no `composer.json` here and nothing is installed into your
+application — the plugin is markdown plus one validation script. It reads your codebase; it does not
+join it.
+
+**A new project is a supported starting point**, not just a large existing one. On an empty codebase
+the architecture is Controller → Action → Eloquent, and every other layer is an extraction made when
+something asks for it. `/adopt-conventions` detects a skeleton and writes the short version of the
+conventions file; the day-one list is in
+[`skills/layered-architecture/references/greenfield-setup.md`](skills/layered-architecture/references/greenfield-setup.md).
+Building all five layers for four endpoints is the same mistake as a fat controller.
+
 ## Install
 
 ```bash

@@ -34,9 +34,12 @@ public function handle(Classm $class, StoreSubjectsDataObject $data): void
 - **A Task never opens a transaction.** It does not know whether it is one step of five.
 - **An Orchestrator never opens one either.** Two independent flows that must commit together are
   not two flows — they are one Action.
-- One `DB::transaction()` per flow, at most. Laravel implements a nested call as a **savepoint**, so
-  an inner rollback leaves the outer transaction alive and the outer work commits anyway. A flow that
-  looks transactional and is not is worse than no transaction at all.
+- One `DB::transaction()` per flow, at most. A nested call is **not** a transaction: Laravel opens a
+  savepoint, and the inner block commits nothing of its own — everything still hangs on the outer
+  commit. Two consequences. Code that assumes "the inner part is safely committed by now" is wrong.
+  And if anything between the inner throw and the outer closure **catches** the exception, the inner
+  work rolls back to the savepoint while the outer work commits, leaving exactly the partial state the
+  transaction was supposed to prevent.
 
 ## Nothing that is not a database write goes inside
 
@@ -48,8 +51,9 @@ writes, mail, and anything that sleeps or retries.
 
 **Dispatch after commit.** A job dispatched inside a transaction is visible to a worker before the
 transaction commits, and the worker fails to find a row that "obviously exists". The failure is load
-dependent, so it never reproduces locally. Use `DB::afterCommit()`, or `$afterCommit = true` on the
-job, or dispatch outside the closure as above.
+dependent, so it never reproduces locally. Dispatch outside the closure as above, or declare the
+intent on the job — `->afterCommit()` on the dispatch, `public bool $afterCommit = true;` on the
+class, or `after_commit => true` on the queue connection so it is the default.
 
 **Flush the cache after commit too.** A flush inside the transaction lets a concurrent request
 repopulate the cache from pre-commit state, and the stale entry then outlives the write that was

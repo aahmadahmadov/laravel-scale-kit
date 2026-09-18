@@ -23,6 +23,27 @@ Extract when the code is needed in **2 or more** places — a second project, or
 context in this one. Not before. A package built for one consumer is a folder move that adds a
 release step and buys nothing.
 
+## Where generic code lives before it earns a package
+
+A new project has no `packages/` and no second consumer, so "put the generic criteria in the shared
+package" is not yet an instruction it can follow. The path is:
+
+```
+app/Criteria/Shared/      generic, model-agnostic, one consumer      ← start here, always
+        ↓                 a second project or bounded context needs it
+packages/<vendor>/<name>/ generic, model-agnostic, 2+ consumers
+```
+
+`app/Criteria/Shared/` holds exactly what the package would hold — `FieldEqualsCriteria`,
+`FilterFieldsCriteria`, `RequestSortCriteria`, `WithCriteria` — under the same rule that makes them
+promotable later: **a class in `Shared/` names no domain model and no `App\Models\…` type.** Keep
+that true from the first file and the eventual extraction is a directory move. Break it once and the
+extraction becomes a rewrite.
+
+Wherever the rest of this kit says "the shared package", read it as **`app/Criteria/Shared/` until
+the second consumer exists, `packages/` after**. The rule was never about the composer package; it
+was about the code being generic and living in one place.
+
 What typically earns extraction in a Laravel codebase of this shape:
 
 | Package | Holds |

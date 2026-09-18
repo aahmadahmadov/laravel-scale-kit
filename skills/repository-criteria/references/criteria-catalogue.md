@@ -1,7 +1,11 @@
 # Criteria catalogue
 
-The set of generic criteria a medium-to-large project ends up needing. Implement these once, in a
-shared package, parameterised by column/relation — never per model.
+The set of generic criteria a medium-to-large project ends up needing. Implement these once,
+parameterised by column/relation — never per model.
+
+They live in `app/Criteria/Shared/` from the first file, and move to `packages/` once a second
+project or bounded context needs them. Not before: see `package-extraction`. The location changes;
+the rule that none of them names a model does not.
 
 ## Field criteria
 

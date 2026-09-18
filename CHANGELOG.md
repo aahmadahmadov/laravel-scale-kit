@@ -24,6 +24,12 @@ All notable changes to this project are documented here. Format follows
   10.6+), that **PostgreSQL is not supported**, and that the toolkit the skills describe is specified
   but not shipped.
 
+- `layered-architecture/references/greenfield-setup.md` — what to build on day one of a new project,
+  which directories NOT to create yet, and the decisions that are expensive to retrofit. The kit
+  previously had no path for an empty codebase.
+- An eighth eval case, `greenfield-first-endpoint`, which regression-tests exactly that: the answer
+  must not propose a package, an Orchestrator or empty layer folders for a one-developer project.
+
 ### Changed
 
 - Every skill's `metadata.version` now follows the plugin version, enforced in CI.
@@ -31,8 +37,17 @@ All notable changes to this project are documented here. Format follows
   properties of the pattern.
 - `domain-exceptions` and `repository-criteria` now link their own reference documents, which were
   previously only reachable from `SKILLS.md`.
+- `/adopt-conventions` branches on whether a project exists yet, instead of surveying a skeleton and
+  reporting a list of zeros. `/new-endpoint` treats "nothing exists yet" as a complete answer.
+- `templates/CLAUDE.md` marks the sections a new project should delete as `[optional]`.
 
 ### Fixed
+
+- **Four skills required generic criteria to live in a shared composer package, while
+  `package-extraction` forbade creating one before a second consumer exists.** On a new project those
+  rules deadlocked. The promotion path is now explicit — `app/Criteria/Shared/` from the first file,
+  `packages/` once a second consumer appears — and `repository-criteria`, `filterable-list-endpoints`
+  and `layered-architecture` were corrected to match.
 
 - `be-auth` and `code-review` hold `Bash` but never restated the database write restriction, which
   CONTRIBUTING.md requires of every agent that can reach a database. Both now do.

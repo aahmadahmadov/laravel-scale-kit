@@ -5,6 +5,19 @@ argument-hint: [project type hint, e.g. "new Laravel 12 API" or "existing codeba
 
 Set up this project's conventions file. Context: **$ARGUMENTS**
 
+## 0. Is there a project yet?
+
+If `app/` is empty or holds only Laravel's defaults, this is a **new** project. Do not run the survey
+below against a skeleton and report a list of zeros. Instead:
+
+- Read `layered-architecture/references/greenfield-setup.md` and follow its day-one list.
+- Write the conventions file with only the sections that describe something real today: stack,
+  database safety, architecture, PHP standard, exceptions, authorization, localization, testing.
+- **Delete** Large Tables, Local Packages, Repository caching, Integrations and the legacy-service
+  note. Say, in one line, that they are added when the thing they describe exists.
+
+Then stop. Steps 1 and 2 below are for an existing codebase.
+
 ## 1. Survey the project
 
 Do not guess. Establish and report:

@@ -39,10 +39,15 @@ public function test_it_scopes_to_the_education_year(): void
         ->apply($query, $this->repository)
         ->toSql();
 
-    $this->assertStringContainsString('"education_year_id" = ?', $sql);
+    $this->assertStringContainsString('`education_year_id` = ?', $sql);
+    $this->assertStringContainsString('`cancelled_at` is null', $sql);
     $this->assertSame([7], $query->getBindings());
 }
 ```
+
+`toSql()` renders the **connection's** grammar: backticks on MySQL/MariaDB, double quotes on SQLite
+and PostgreSQL. A criteria test written against one and run against another fails on the quoting and
+nothing else — one more reason the test connection must be the engine production runs.
 
 If a criteria is awkward to test, it is doing two things. Split it.
 
@@ -101,10 +106,10 @@ tested only on 200 is untested.
 **Cache state survives between tests** when the driver is shared. Flush tags in `setUp()`, or use the
 array driver for tests and accept that tag behaviour then differs from production.
 
-**Do not assert query counts** unless the count is the requirement. `assertQueryCount(3)` fails on
-every unrelated eager load and gets deleted rather than fixed. Assert the absence of the thing you
-care about — a lazy-load exception, for example, which a disabled lazy-loading setting already
-raises.
+**Do not assert query counts** unless the count is the requirement. A test that counts queries
+through `DB::listen()` fails on every unrelated eager load and gets deleted rather than fixed. Assert
+the absence of the thing you care about instead — a lazy-load exception, which `preventLazyLoading()`
+already raises for you.
 
 ## Checklist
 

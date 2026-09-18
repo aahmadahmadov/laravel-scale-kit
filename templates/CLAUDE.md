@@ -5,6 +5,10 @@ Guidance for Claude Code in <project-name>.
 > Generated from [laravel-scale-kit](https://github.com/aahmadahmadov/laravel-scale-kit).
 > This file holds the **decisions**. The depth lives in the plugin's skills, which load on demand —
 > keep this file short enough that it is actually read.
+>
+> Sections marked **[optional]** describe something not every project has. **Delete the ones that do
+> not apply** and add them back the day the thing exists. A new project usually keeps about half of
+> this file; a rule about a layer you do not have teaches agents that the file is decorative.
 
 ## Stack
 
@@ -62,7 +66,7 @@ DTO → Resource → JSON`
 | Action | `app/Actions/` | Business logic for **exactly one** flow. **Never calls another Action** |
 | Task | `app/Tasks/` | One narrow, reusable unit of real work. **Never calls another Task** |
 | Repository | `app/Repositories/` | Declares `model()`. Nothing else |
-| Criteria | `app/Criteria/<Domain>/` | Domain-specific query filters. Generic ones live in <package> |
+| Criteria | `app/Criteria/<Domain>/` | Domain-specific query filters. Generic, model-agnostic ones live in `app/Criteria/Shared/` (promoted to <package> at a second consumer) |
 | DTO | `app/DTO/` | `spatie/laravel-data`. Named `*DataObject` |
 | Resource | `app/Http/Resources/` | Serialization only |
 
@@ -161,13 +165,13 @@ enums; external values parsed with `tryFrom()`.
 
 Depth: the `localization-enums` skill.
 
-## Repository Rules
+## Repository Rules [optional]
 
 - Repositories define `model()` only. No `findById`, no `create`, no business helpers.
 - Never call Eloquent (`where`, `with`, `whereHas`) on a repository outside a Criteria.
 - Eager-load through `WithCriteria`, never `->with([...])`.
-- A dedicated Criteria class is earned by **2+ reuses**. A single-column check uses the generic
-  package criteria.
+- A dedicated Criteria class is earned by **2+ reuses**. A single-column check uses a generic
+  criteria from `app/Criteria/Shared/`.
 - **Never use the `DB` facade** unless explicitly asked — it bypasses events, observers, caching and
   soft deletes.
 - Pushing criteria in a loop: wrap in the fresh-criteria helper, and confirm it re-applies boot
@@ -177,7 +181,7 @@ Depth: the `localization-enums` skill.
 
 Depth: the `repository-criteria` and `repository-caching` skills.
 
-## Filter & Sort Rules
+## Filter & Sort Rules [optional]
 
 List endpoints use the shared filterable-list stack from <package>. The Form Request declares
 allowed filters and sorts; the Action pushes `FilterFieldsCriteria`, `FilterTrashedStatusCriteria`
@@ -186,7 +190,7 @@ and `RequestSortCriteria` **unconditionally**.
 **An Action or Task never reads request input.** No `request()`, no `$request` parameter, no
 `filled()` gate around a push. The criteria reads the request and no-ops when the value is blank.
 
-New filter shapes are written **in the package** as generic classes, not as one-offs in `app/`.
+New filter shapes are written as **generic classes** in `app/Criteria/Shared/` (or <package>, once one exists), never as a one-off next to the endpoint that needed it.
 
 Depth: the `filterable-list-endpoints` skill.
 
@@ -201,7 +205,7 @@ never a `const`, never an enum.
 
 Depth: the `eloquent-model-conventions` skill.
 
-## Sorting & Query Constraints
+## Sorting & Query Constraints [optional]
 
 - In-memory sorting goes through `app/Support/Comparators/<Entity>Comparator::by<Criteria>()` —
   never an inline closure. Always include a deterministic tiebreaker.
@@ -221,7 +225,7 @@ environments drift.
 
 Depth: the `migrations-schema` skill.
 
-## Large Tables
+## Large Tables [optional]
 
 | Table | Approx rows | Rule |
 |---|---|---|
@@ -229,7 +233,7 @@ Depth: the `migrations-schema` skill.
 
 Depth: the `query-performance` skill.
 
-## Integrations
+## Integrations [optional]
 
 Third-party HTTP APIs: an **Adapter** (transport, thin one-liners, explicit timeout) paired with a
 **Manager** (normalises response shapes, maps upstream errors to a domain exception with your own
@@ -237,7 +241,7 @@ translation key, never returns success on failure). Both log to a dedicated per-
 
 Depth: the `http-integrations` skill.
 
-## Local Packages
+## Local Packages [optional]
 
 <Name each package, its composer name, namespace, and what it holds. State the boundary rule: a
 package must never depend on the `App\` namespace, and its translations ship under its own
@@ -257,7 +261,7 @@ Depth: the `package-extraction` skill.
 - `DB::transaction()` is opened in the Action and nowhere else; jobs dispatch and caches flush after
   it commits.
 
-## Agent Team
+## Agent Team [optional]
 
 The active session is the **manager**: understand, delegate, verify. <Keep or delete this section
 depending on whether the project uses subagents.>

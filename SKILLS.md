@@ -7,6 +7,7 @@ seeing how the pieces fit.
 
 | You are asking | Skill |
 |---|---|
+| "I am starting a new project — what do I build first?" | `layered-architecture` → `references/greenfield-setup.md` |
 | "Where does this logic go?" | `layered-architecture` |
 | "Should this be an Action, a Task, or inline?" | `layered-architecture` → `references/decision-tree.md` |
 | "How do I build this endpoint end to end?" | `layered-architecture` → `references/worked-example.md` |
@@ -62,6 +63,10 @@ seeing how the pieces fit.
 
 **Code review**
 `/architecture-review`, then `layered-architecture` → `php-standards` → `query-performance`
+
+**Starting a new project**
+`layered-architecture/references/greenfield-setup.md` → `/adopt-conventions` → `http-boundary` →
+`domain-exceptions` → `authorization-policies`
 
 **Adopting the kit in an existing codebase**
 `/adopt-conventions` → `layered-architecture/references/migrating-from-services.md` →

@@ -25,6 +25,11 @@ Controller → (Orchestrator →) Action → Task → Repository (+ Criteria) �
 
 The orchestrator is optional. Use the shallowest chain that satisfies the use-case.
 
+On a new project the shallowest chain is Controller → Action → Eloquent, and that is the architecture
+at minimum size — every other layer is an extraction from it, made when something asks for it. See
+`references/greenfield-setup.md`. Building all five layers for four endpoints is the same mistake as
+a fat controller, wearing better clothes.
+
 | Use-case | Entry point calls |
 |---|---|
 | One flow, small or large | Controller → Action |
@@ -40,7 +45,7 @@ The orchestrator is optional. Use the shallowest chain that satisfies the use-ca
 | Action | `app/Actions/` | Own **one flow** end to end: get → process → calculate → persist, composing Tasks | Call another Action, read request input, authorize |
 | Task | `app/Tasks/` | Perform **one narrow unit of real work**, reusable across Actions | Call another Task, hold flow-level branching, wrap a single query in a class |
 | Repository | `app/Repositories/` | Declare `model()` and nothing else | Contain `findById`, `where`, `with`, or any business helper |
-| Criteria | `app/Criteria/<Domain>/` | Express one composable query constraint | Hold anything model-agnostic — that belongs in a shared package |
+| Criteria | `app/Criteria/<Domain>/` | Express one composable query constraint | Name a model when it is generic — a model-agnostic criteria belongs in `app/Criteria/Shared/` |
 
 ## Decision procedure
 
@@ -96,6 +101,7 @@ throw new EnrollmentException(
 
 | Topic | File | Load when |
 |---|---|---|
+| Starting a brand-new project | `references/greenfield-setup.md` | The codebase is empty or nearly so |
 | Worked example, controller to JSON | `references/worked-example.md` | Building a new endpoint from scratch |
 | Choosing between the layers | `references/decision-tree.md` | Unsure whether something is an Action, Task or inline |
 | Migrating away from services | `references/migrating-from-services.md` | The codebase still has `app/Services/` |
